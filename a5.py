@@ -106,7 +106,20 @@ class Board:
         Returns:
             a tuple of row, column index identifying the most constrained cell
         """
-        pass
+        shortestLen = self.size + 1
+        row = 0
+        col = 0
+        for i in range(self.size):
+            for j in range(self.size):
+                if isinstance(self.rows[i][j], List):
+                    if(len(self.rows[i][j]) < shortestLen):
+                        shortestLen = len(self.rows[i][j])
+                        row = i
+                        col = j
+        return (row, col)
+
+
+                
 
     def failure_test(self) -> bool:
         """Check if we've failed to correctly fill out the puzzle. If we find a cell
@@ -125,7 +138,8 @@ class Board:
         Returns:
             True if we've placed all numbers, False otherwise
         """
-        pass
+        if self.num_nums_placed == self.size * self.size: return True
+        else: return False
 
     def update(self, row: int, column: int, assignment: int) -> None:
         """Assigns the given value to the cell given by passed in row and column
@@ -139,7 +153,15 @@ class Board:
             column - index of the column to assign
             assignment - value to place at given row, column coordinate
         """
-        pass
+        for i in range(self.size):
+            remove_if_exists(self.rows[i][column], assignment)
+            remove_if_exists(self.rows[row][i], assignment)
+        coords = self.subgrid_coordinates(row, column)
+        for x in coords:
+            remove_if_exists(self.rows[x[0]][x[1]], assignment)
+        self.rows[row][column] = assignment
+
+        self.num_nums_placed += 1
 
 
 def DFS(state: Board) -> Board:
@@ -174,7 +196,14 @@ def BFS(state: Board) -> Board:
 
 if __name__ == "__main__":
     # uncomment the below lines once you've implemented the board class
-   
+    b = Board()
+    b.update(0, 0, 4)
+    b.update(1, 0, 1)
+    b.update(1, 1, 3)
+    b.update(0, 8, 7)
+    b.print_pretty()
+    print(b.find_most_constrained_cell())
+    print(b)
     # # CODE BELOW HERE RUNS YOUR BFS/DFS
     # print("<<<<<<<<<<<<<< Solving Sudoku >>>>>>>>>>>>>>")
 
