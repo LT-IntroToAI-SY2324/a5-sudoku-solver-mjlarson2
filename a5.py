@@ -196,6 +196,7 @@ def DFS(state: Board) -> Board:
                 the_stack.push(cpy)
                 print(the_stack.len())
     return None
+    #mistake
 
 
 def BFS(state: Board) -> Board:
