@@ -113,3 +113,6 @@ class Queue:
             the oldest added element
         """
         return self.the_queue.pop(0)
+    
+    def len(self) -> int:
+        return len(self.the_queue)
