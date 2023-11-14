@@ -184,9 +184,11 @@ def DFS(state: Board) -> Board:
     """
     the_stack = Stack()
     the_stack.push(state)
+    i = 0
     while not the_stack.is_empty():
         curr = the_stack.pop()
         if curr.goal_test():
+            print(f"Iterations: {i}")
             return curr
         elif not curr.failure_test():
             row, col = curr.find_most_constrained_cell()
@@ -194,7 +196,9 @@ def DFS(state: Board) -> Board:
                 cpy = copy.deepcopy(curr)
                 cpy.update(row, col, sel)
                 the_stack.push(cpy)
-                print(the_stack.len())
+                # print(the_stack.len())
+        i += 1
+    print(f"Iterations: {i}")
     return None
     #mistake
 
@@ -211,7 +215,24 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    the_queue = Queue()
+    the_queue.push(state)
+    i = 0
+    while not the_queue.is_empty():
+        curr = the_queue.pop()
+        if curr.goal_test():
+            print(f"Iterations: {i}")
+            return curr
+        elif not curr.failure_test():
+            row, col = curr.find_most_constrained_cell()
+            for sel in curr.rows[row][col]:
+                cpy = copy.deepcopy(curr)
+                cpy.update(row, col, sel)
+                the_queue.push(cpy)
+                # print(the_queue.len())
+        i += 1
+    print(f"Iterations:  {i}")
+    return None
 
 
 if __name__ == "__main__":
@@ -360,11 +381,11 @@ if __name__ == "__main__":
 
     test_dfs_or_bfs(True, second_moves)
 
-    # print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(False, first_moves)
+    test_dfs_or_bfs(False, first_moves)
 
-    # print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(False, second_moves)
+    test_dfs_or_bfs(False, second_moves)
     pass
