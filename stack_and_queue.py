@@ -57,6 +57,9 @@ class Stack:
             the most recently added element
         """
         return self.the_stack.pop()
+    
+    def len(self) -> int:
+        return len(self.the_stack)
 
 
 class Queue:
