@@ -30,7 +30,7 @@ BFS could be more efficient in puzzles simpler than either of the two tested.
 
 2. How did the choice of data structures (like the Stack for DFS and Queue for BFS) impact the implementation and functionality of the algorithms? Are there alternative data structures or design patterns that could have been used to achieve the same objectives?
 
-The choice of data structures was fairly impactful on the implementation and functionality of those algorithms: the FIFO nature of the queue greatly helped facilitate the bread-first search, and the LIFO nature of the stack did the same for DFS. This same objective could likely have been done with conventional lists in some way, but the use of stack and queue feels like the easiest way to have done it.
+The choice of data structures was fairly impactful on the implementation and functionality of those algorithms: the FIFO nature of the queue greatly helped facilitate the bread-first search, and the LIFO nature of the stack did the same for DFS. This same objective could likely have been aided by data structures such as linked lists or trees, which better replicate the node-based nature of BFS and DFS.
 
 3. Considering the current implementation, how might the Sudoku solver be adapted or extended for larger puzzles or different types of grid-based logic games? How can the lessons learned from this assignment be applied to real-world problem-solving or optimization challenges?
 
